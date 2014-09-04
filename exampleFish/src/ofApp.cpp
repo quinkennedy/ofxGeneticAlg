@@ -7,8 +7,7 @@ void ofApp::setup(){
     Transcriptor t;
     Nucleotide n;
     int answer[] = {1,0,1,0,1,0,1,0,1,0,1};
-    ofxGenetics genetics(MatingType.Polygyandry, LifeCycle.Gametic, 2, 50);
-    
+	ofxGenetics genetics(Polygyny, Gametic, 2, 50);
 }
 
 //--------------------------------------------------------------

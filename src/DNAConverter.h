@@ -5,12 +5,10 @@
 //  Created by Quin Kennedy on 4/6/14.
 //
 //
+#pragma once
 
-#ifndef GeneticAlgTest_DNAConverter_h
-#define GeneticAlgTest_DNAConverter_h
-
-#import "ofMain.h"
-#import "Nucleotide.h"
+#include "ofMain.h"
+#include "Nucleotide.h"
 
 //for now this will randomly assign nucleotide sequences to indices,
 //later it may try to group indices to neighboring nucleotide sequences
@@ -124,6 +122,4 @@ public:
         //		System.out.println();
 		return narrOutput;
 	}
-}
-
-#endif
+};

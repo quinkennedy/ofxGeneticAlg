@@ -5,12 +5,11 @@
 //  Created by Quin Kennedy on 3/30/14.
 //
 //
-
-#ifndef GeneticAlgTest_Zygote_h
-#define GeneticAlgTest_Zygote_h
+#pragma once
 
 #include "Chromosome.h"
 #include "ofMain.h"
+#include "Gamete.h"
 
 class Zygote {
 private:
@@ -73,7 +72,4 @@ public:
             new Gamete(Intermediate4) };
 		return output;
 	}
-}
-
-
-#endif
+};

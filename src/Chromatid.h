@@ -5,9 +5,7 @@
 //  Created by Quin Kennedy on 3/16/14.
 //
 //
-
-#ifndef GeneticAlgTest_Chromatid_h
-#define GeneticAlgTest_Chromatid_h
+#pragma once
 
 #include "ofMain.h"
 #include "Nucleotide.h"
@@ -99,5 +97,3 @@ public:
         return output;
     }
 };
-
-#endif

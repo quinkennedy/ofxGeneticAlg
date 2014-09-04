@@ -5,11 +5,9 @@
 //  Created by Quin Kennedy on 4/6/14.
 //
 //
+#pragma once
 
-#ifndef GeneticAlgTest_ofxGenetics_h
-#define GeneticAlgTest_ofxGenetics_h
-
-#import "Gamete.h"
+#include "Gamete.h"
 
 struct GameteFitness{
     Gamete* gamete;
@@ -182,5 +180,3 @@ public:
         return permutation;
     }
 };
-
-#endif

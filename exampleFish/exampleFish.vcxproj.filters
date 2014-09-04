@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxGeneticAlg">
+      <UniqueIdentifier>{05BC4D66-6823-5F9B-9650-D6E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxGeneticAlg\src">
+      <UniqueIdentifier>{6773A3A3-34FE-7E6B-03A7-507A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\Chromatid.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\Chromosome.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\DNAConverter.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\Gamete.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\Nucleotide.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\ofxGenetics.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\Transcriptor.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxGeneticAlg\src\Zygote.h">
+      <Filter>addons\ofxGeneticAlg\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>

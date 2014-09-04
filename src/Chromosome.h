@@ -5,9 +5,7 @@
 //  Created by Quin Kennedy on 3/16/14.
 //
 //
-
-#ifndef GeneticAlgTest_Chromasome_h
-#define GeneticAlgTest_Chromasome_h
+#pragma once
 
 #include "ofMain.h"
 #include "Chromatid.h"
@@ -63,5 +61,3 @@ public:
 		return output;
 	}
 };
-
-#endif

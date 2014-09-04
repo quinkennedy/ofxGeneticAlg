@@ -5,9 +5,7 @@
 //  Created by Quin Kennedy on 3/16/14.
 //
 //
-
-#ifndef GeneticAlgTest_Transcriptor_h
-#define GeneticAlgTest_Transcriptor_h
+#pragma once
 
 #include "Chromatid.h"
 #include "ofMain.h"
@@ -93,5 +91,3 @@ public:
 		return new Chromatid(newData);
     }
 };
-
-#endif

@@ -5,9 +5,7 @@
 //  Created by Quin Kennedy on 3/16/14.
 //
 //
-
-#ifndef GeneticAlgTest_Nucleotide_h
-#define GeneticAlgTest_Nucleotide_h
+#pragma once
 
 class Nucleotide{
 private:
@@ -41,5 +39,3 @@ public:
         setData(_data);
     }
 };
-
-#endif

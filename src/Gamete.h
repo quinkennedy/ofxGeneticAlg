@@ -6,10 +6,9 @@
 //
 //
 
-#ifndef GeneticAlgTest_Gamete_h
-#define GeneticAlgTest_Gamete_h
+#pragma once
 
-#import "Zygote.h"
+#include "Zygote.h"
 
 class Gamete {
 private:
@@ -40,6 +39,4 @@ public:
 		}
 		return new Gamete(duplicate);
 	}
-}
-
-#endif
+};
