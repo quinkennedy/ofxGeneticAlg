@@ -1,3 +1,0 @@
-ofxSvg
-ofxVectorGraphics
-ofxGui
