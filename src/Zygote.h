@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "Gamete.h"
 
+//A fertilized Gamete pair
 class Zygote {
 private:
     vector<Chromosome>* maternal;

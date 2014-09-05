@@ -10,11 +10,15 @@
 #include "ofMain.h"
 #include "Nucleotide.h"
 
+//A Chromatid is essentially an arbitrary length sequence of Nucleotides
 class Chromatid{
 private:
     vector<Nucleotide>* data;
 public:
     Chromatid(){}
+    ~Chromatid(){
+        //clean up the Nucleotide list!
+    }
     
     /**
      * Create a Chromatid from a pre-made Nucleotide array
@@ -24,31 +28,10 @@ public:
     }
     
     /**
-     * Create a Chromatid from a byte array
+     *  return a copy of this Chromatid
      */
-    Chromatid(char *_data, long _length){
-        if (_length > 0){
-            //byte is 8-bits right?
-            //TODO: stop assuming Nucleotides are 2 bits
-            //TODO: stop assuming bytes are 8-bits
-            long dataLength = _length * 4;
-            data = new vector<Nucleotide>(dataLength);
-            int k = 0;
-            for(int i = 0; i < _length; i++){
-                char curr = _data[i];
-                for(int j = 6; j >= 0 ; j-=2, k++){
-                    (*data)[k].setData((curr >> j) & 0xff);
-                }
-            }
-        }
-    }
-    
     Chromatid* copy(){
-        vector<Nucleotide>* newData = new vector<Nucleotide>(data->size());
-        for(int i = 0; i < data->size(); i++){
-            (*newData)[i].setData((*data)[i].getData());
-        }
-        return new Chromatid(newData);
+        return new Chromatid(new vector<Nucleotide>(*data));
     }
     
     vector<Nucleotide>* getNucleotides(){
@@ -81,19 +64,5 @@ public:
                 nThis++;
             }
         }
-    }
-    
-    char* getDataAsString(){
-        int outLength = (data->size()+3)/4;
-        char *output = new char[outLength+1];
-        int k = 0;
-        for(int i = 0; i < outLength; i++){
-            output[i] = 0;
-            for(int j = 6; j >= 0 && k < data->size(); j-=2, k++){
-                output[i] |= ((*data)[k].getData() << j);
-            }
-        }
-        output[outLength] = 255;
-        return output;
     }
 };

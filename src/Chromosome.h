@@ -11,6 +11,7 @@
 #include "Chromatid.h"
 #include "Transcriptor.h"
 
+//A Chromosome is basically one (sometimes 2) Chromatids
 class Chromosome{
 private:
     
@@ -25,19 +26,15 @@ public:
     }
     
 	void replicate() {
-		Transcriptor t = Transcriptor();
+		Transcriptor t;
 		chromatidB = t.transcribe(chromatidA);
 	}
     
-	void crossover(Chromosome chromosome) {
-		chromatidA->crossover(chromosome.chromatidA);
-		chromatidA->crossover(chromosome.chromatidB);
-		chromatidB->crossover(chromosome.chromatidA);
-		chromatidB->crossover(chromosome.chromatidB);
-	}
-    
-	string getDataAsString() {
-		return chromatidA->getDataAsString();
+	void crossover(Chromosome other) {
+		chromatidA->crossover(other.chromatidA);
+		chromatidA->crossover(other.chromatidB);
+		chromatidB->crossover(other.chromatidA);
+		chromatidB->crossover(other.chromatidB);
 	}
     
 	vector<Nucleotide>* getNucleotides() {

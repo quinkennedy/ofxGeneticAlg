@@ -10,6 +10,7 @@
 #include "Chromatid.h"
 #include "ofMain.h"
 
+//A Transcriptor is responsible for replicating Chromatids
 class Transcriptor{
 public:
     Transcriptor(){}

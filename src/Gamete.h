@@ -18,14 +18,13 @@ public:
     Gamete(vector<Chromosome>* _chromosomes) {
 		chromosomes = _chromosomes;
 	}
-    /*
-    string toString() {
-		return (*chromosomes)[0].getDataAsInt() + " : "
-        + (*chromosomes)[1].getDataAsString();
-	}*/
+    
+    ~Gamete(){
+        //TODO: clean up chromosomes!
+    }
     
     Zygote* fertilize(Gamete m_Gamete) {
-		return new Zygote(m_arrChromosomes, m_Gamete.GetChromosomes());
+		return new Zygote(chromosomes, m_Gamete.getChromosomes());
 	}
     
     vector<Chromosome>* getChromosomes() {
@@ -33,9 +32,11 @@ public:
 	}
     
     Gamete* copy() {
-		vector<Chromosome>* duplicate = new vector<Chromosome>(chromosomes->size());
+		vector<Chromosome>* duplicate = new vector<Chromosome>();
+        duplicate->reserve(chromosomes->size());
 		for (int i = 0; i < chromosomes->size(); i++) {
-			duplicate[i] = (*chromosomes)[i].copy();
+            duplicate->push_back(Chromosome());
+            (duplicate.end()--)->setChromatid(chromosomes->at(i)->chromatidA->copy());
 		}
 		return new Gamete(duplicate);
 	}
