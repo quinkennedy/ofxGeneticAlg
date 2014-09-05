@@ -44,7 +44,7 @@ public:
         matingType = _matingType;
         lifeCycle = _lifeCycle;
         generationSize = _generationSize;
-        dnaConverter(_numChunks);
+        dnaConverter.init(_numChunks);
     }
 	
 	public ArrayList<int[]> GetCurrentOrganisms(){

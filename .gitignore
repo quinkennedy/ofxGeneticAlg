@@ -1,4 +1,9 @@
 .DS_Store
+.Trashes
+*~.nib
+DerivedData/
+xcuserdata
+*.xccheckout
 *.depend
 *.layout
 *.mode1v3
