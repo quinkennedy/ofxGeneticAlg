@@ -36,7 +36,7 @@ public:
         duplicate->reserve(chromosomes->size());
 		for (int i = 0; i < chromosomes->size(); i++) {
             duplicate->push_back(Chromosome());
-            (duplicate.end()--)->setChromatid(chromosomes->at(i)->chromatidA->copy());
+            (duplicate->end()--)->setChromatid(chromosomes->at(i).chromatidA->copy());
 		}
 		return new Gamete(duplicate);
 	}

@@ -19,14 +19,14 @@ private:
     
 	void replicate() {
 		for (int i = 0; i < maternal->size(); i++) {
-			(*maternal)[i].replicate();
-			(*paternal)[i].replicate();
+            maternal->at(i).replicate();
+            paternal->at(i).replicate();
 		}
 	}
     
 	void crossover() {
 		for (int i = 0; i < maternal->size(); i++) {
-			(*maternal)[i].crossover((*paternal)[i]);
+            maternal->at(i).crossover(paternal->at(i));
 		}
 	}
     
@@ -48,8 +48,8 @@ private:
                             vector<Chromosome>* ao_Intermediate3,
                             vector<Chromosome>* ao_Intermediate4) {
 		for (int i = 0; i < ao_Intermediate1->size(); i++) {
-			(*ao_Intermediate3)[i].setChromatid(new Chromatid((*ao_Intermediate1)[i].split().getNucleotides()));
-			(*ao_Intermediate4)[i].setChromatid(new Chromatid((*ao_Intermediate2)[i].split().getNucleotides()));
+			(*ao_Intermediate3)[i].setChromatid(new Chromatid((*ao_Intermediate1)[i].split()->getNucleotides()));
+			(*ao_Intermediate4)[i].setChromatid(new Chromatid((*ao_Intermediate2)[i].split()->getNucleotides()));
 		}
 	}
 public:
@@ -58,7 +58,7 @@ public:
 		paternal = _paternal;
 	}
     
-	vector<Gamete>* split() {
+	vector<Gamete*>* split() {
         long maternalLength = maternal->size();
 		replicate();
 		crossover();
@@ -68,9 +68,11 @@ public:
 		vector<Chromosome>* Intermediate3 = new vector<Chromosome>(maternalLength);
 		vector<Chromosome>* Intermediate4 = new vector<Chromosome>(maternalLength);
 		finalSplit(Intermediate1, Intermediate2, Intermediate3, Intermediate4);
-		Gamete[] output = new Gamete[] { new Gamete(Intermediate1),
-            new Gamete(Intermediate2), new Gamete(Intermediate3),
-            new Gamete(Intermediate4) };
+        vector<Gamete>* output = new vector<Gamete>();
+        output->push_back(new Gamete(Intermediate1));
+        output->push_back(new Gamete(Intermediate2));
+        output->push_back(new Gamete(Intermediate3));
+        output->push_back(new Gamete(Intermediate4));
 		return output;
 	}
 };

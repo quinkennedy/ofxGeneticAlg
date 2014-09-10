@@ -10,17 +10,18 @@
 #include "ofMain.h"
 #include "Nucleotide.h"
 
+template<class T>
 //for now this will randomly assign nucleotide sequences to indices,
 //later it may try to group indices to neighboring nucleotide sequences
 //to mimic http://upload.wikimedia.org/wikipedia/en/d/d6/GeneticCode21-version-2.svg
-public class DNAConverter{
+class DNAConverter{
 private:
     //lookup by codon index, returns Amino Acid index
     vector<int> codonToAminoAcid;
     
     //lookup by Amino Acid index, returns vector of possible codon indices
     vector<vector<int>*> aminoAcidToCodons;
-    
+    vector<T> aminoAcids;
     int codonLength;
     int numCodons;
     int numAminoAcids;
@@ -35,8 +36,8 @@ public:
     vector<int> codonToNucleotides(int codon){
         vector<int> result;
         for(int i = 0; i < codonLength; i++){
-            result.emplace(result.begin(), codon%Nucleotide.NUM);
-            codon /= Nucleotide.NUM;
+            result.emplace(result.begin(), codon % Nucleotide::NUM);
+            codon /= Nucleotide::NUM;
         }
         return result;
     }
@@ -44,8 +45,8 @@ public:
     //essentially a base conversion from base(Nucleotide.NUM) -> base(10)
     int nucleotidesSequenceToCodon(vector<int> sequence){
         int result = 0;
-        for (int i = sequence.size() - 1, m = 1; i >= 0; i--, m *= Nucleotide.NUM){
-            result += *(sequence.at(i)) * m;
+        for (int i = sequence.size() - 1, m = 1; i >= 0; i--, m *= Nucleotide::NUM){
+            result += (*(sequence.at(i))) * m;
         }
         return result;
     }
@@ -58,10 +59,11 @@ public:
      * which are encoded by 64 possible sequences 
      * (4 nucleotides, in sequences of 3 (a codon) => 4^3 = 64).
     **/
-    void init(int numberAminoAcids){
-        numAminoAcids = numberAminoAcids;
-		codonLength = (int)Math.ceil(Math.log(numAminoAcids)/Math.log(Nucleotide.NUM));
-        numCodons = pow(Nucleotide.NUM, codonLength);
+    void init(vector<T> _aminoAcids){
+        aminoAcids = _aminoAcids;
+        numAminoAcids = aminoAcids.size();
+		codonLength = (int)Math.ceil(Math.log(numAminoAcids)/Math.log(Nucleotide::NUM));
+        numCodons = pow(Nucleotide::NUM, codonLength);
         
         //populate lookup "table" with all Amino Acids
         codonToAminoAcid.reserve(numCodons);
@@ -91,7 +93,7 @@ public:
 	}
 	
     //takes in a vector of "Amino Acids" and returns a vector of Nucleotides
-    vector<Nucleotide>* aminoAcidsToNucleotides(vector<int>* aminoAcids){
+    vector<Nucleotide>* aminoAcidsToNucleotides(vector<T>* _aminoAcids){
         //		System.out.print("sequence in:");
         //		for(int i : a_narrSequence){
         //			System.out.print(i+",");
@@ -100,8 +102,19 @@ public:
         
         
         vector<Nucleotide>* output = new vector<Nucleotide>();
-        for(int i = 0; i < aminoAcids->size(); i++){
-            vector<int>* codonOptions = *(aminoAcidToCodons.at(*(aminoAcids.at(i))));
+        int aaIndex;
+        for(int i = 0; i < _aminoAcids->size(); i++){
+            T currAminoAcid = *(_aminoAcids->at(i));
+            for(aaIndex = 0; aaIndex < numAminoAcids; aaIndex++){
+                if (currAminoAcid == *(aminoAcids.at(aaIndex))){
+                    break;
+                }
+            }
+            if (aaIndex >= numAminoAcids){
+                //an un-declared "Amino Acid" was used
+                continue;
+            }
+            vector<int>* codonOptions = *(aminoAcidToCodons.at(aaIndex));
             int codon = *(codonOptions->at((int)ofRandom(codonOptions->size())));
             vector<int>* nucleotideSequence = codonToNucleotides(codon);
             for(int j = 0; j < nucleotideSequence->size(); j++){
@@ -117,7 +130,7 @@ public:
         return output;
 	}
 	
-    vector<int>* nucleotidesToAminoAcids(vector<Nucleotide>* nucleotides){
+    vector<T>* nucleotidesToAminoAcids(vector<Nucleotide>* nucleotides){
         //		System.out.print("sequence in:");
         //		for(Nucleotide n : a_arrSequence){
         //			System.out.print(n.m_Data+",");
@@ -125,7 +138,7 @@ public:
         //		System.out.println();
         
         
-        vector<int>* output = new vector<int>();
+        vector<T>* output = new vector<T>();
         vector<int> sequence;
         sequence.resize(codonLength);
         for(int i = 0; i < nucleotides.size(); ){
@@ -135,7 +148,10 @@ public:
             }
             if (j == codonLength){
                 //edge case, this makes sure the final codon is a complete codon
-                output->push_back(*(codonToAminoAcid->at(nucleotideSequenceToCodon(sequence))));
+                //  convert the nucleotide sequence to a codon index
+                //  convert the codon index to an amino acid index
+                //  convert the amino acid index to an amino acid object
+                output->push_back(*(aminoAcids.at(*(codonToAminoAcid->at(nucleotideSequenceToCodon(sequence))))));
             }
         }
         
