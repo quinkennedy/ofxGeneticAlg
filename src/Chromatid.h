@@ -13,7 +13,7 @@
 //A Chromatid is essentially an arbitrary length sequence of Nucleotides
 class Chromatid{
 private:
-    vector<Nucleotide>* data;
+    vector<Nucleotide>* data = NULL;
 public:
     Chromatid(){}
     ~Chromatid(){
@@ -38,13 +38,16 @@ public:
         return data;
     }
 
-    int getLength(){
+    size_t getLength(){
         return data->size();
     }
 
     void crossover(Chromatid* other){
-        int minLength = (data->size() <= other->getLength() ? data->size() : other->getLength());
-        int maxLength = (data->size() >= other->getLength() ? data->size() : other->getLength());
+        size_t minLength = (data->size() <= other->getLength() ? data->size() : other->getLength());
+        if (minLength == 0){
+            return;
+        }
+        size_t maxLength = (data->size() >= other->getLength() ? data->size() : other->getLength());
         int start = ofRandom(minLength);
         int end = ofRandom(maxLength);
         if (end >= start) {
@@ -53,15 +56,13 @@ public:
                 end = start-1;
                 start = 0;
             }
-            char temp;
-            Nucleotide *nOther = &(*(*other).getNucleotides())[start];
-            Nucleotide *nThis = &(*data)[start];
+            int temp;
+            //TODO: probably cleaner with iterators
+            vector<Nucleotide>* otherData = other->getNucleotides();
             for(int i = start; i <= end; i++){
-                temp = nOther->getData();
-                nOther->setData(nThis->getData());
-                nThis->setData(temp);
-                nOther++;
-                nThis++;
+                temp = otherData->at(i).getData();
+                otherData->at(i).setData(data->at(i).getData());
+                data->at(i).setData(temp);
             }
         }
     }

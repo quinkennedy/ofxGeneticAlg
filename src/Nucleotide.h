@@ -9,13 +9,13 @@
 
 class Nucleotide{
 private:
-    char data;
+    int data = 0;
 public:
     const static int NUM = 4;
     
     Nucleotide(){}
     
-    char setData(char _data){
+    char setData(int _data){
         if (_data <= 0){
             data = 0;
         } else if (_data >= NUM - 1){
@@ -25,17 +25,15 @@ public:
         }
     }
     
-    char getData(){
+    int getData(){
         return data;
     }
     
     Nucleotide* copy(){
-        Nucleotide *copy = new Nucleotide();
-        copy->setData(data);
-        return copy;
+        return new Nucleotide(data);
     }
     
-    Nucleotide(char _data){
+    Nucleotide(int _data){
         setData(_data);
     }
 };

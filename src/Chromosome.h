@@ -10,14 +10,16 @@
 #include "ofMain.h"
 #include "Chromatid.h"
 #include "Transcriptor.h"
+#include "Nucleotide.h"
+#include "Chromosome.h"
 
 //A Chromosome is basically one (sometimes 2) Chromatids
 class Chromosome{
 private:
     
 public:
-    Chromatid* chromatidA;
-    Chromatid* chromatidB;
+    Chromatid* chromatidA = NULL;
+    Chromatid* chromatidB = NULL;
     
     Chromosome(){}
     

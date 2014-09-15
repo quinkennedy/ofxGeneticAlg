@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include "Zygote.h"
+#include "Chromosome.h"
 
 class Gamete {
 private:
-	vector<Chromosome>* chromosomes;
+	vector<Chromosome>* chromosomes = NULL;
 public:
     
     Gamete(vector<Chromosome>* _chromosomes) {
@@ -22,10 +22,6 @@ public:
     ~Gamete(){
         //TODO: clean up chromosomes!
     }
-    
-    Zygote* fertilize(Gamete m_Gamete) {
-		return new Zygote(chromosomes, m_Gamete.getChromosomes());
-	}
     
     vector<Chromosome>* getChromosomes() {
 		return chromosomes;

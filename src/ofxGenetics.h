@@ -7,11 +7,11 @@
 //
 #pragma once
 
-#include "Gamete.h"
+#include "Zygote.h"
 #include "DNAConverter.h"
 
 struct GameteFitness{
-    Gamete* gamete;
+    Gamete* gamete = NULL;
     long long fitness;
 };
 
@@ -38,14 +38,12 @@ private:
     MatingType matingType;
     LifeCycle lifeCycle;
     vector<Gamete> children;
-    int generationSize;
     vector<GameteFitness> fitnessList;
     DNAConverter<T> dnaConverter;
 public:
-    ofxGenetics(MatingType _matingType, LifeCycle _lifeCycle, vector<T> _aminoAcids, int _generationSize){
+    ofxGenetics(MatingType _matingType, LifeCycle _lifeCycle, vector<T> _aminoAcids){
         matingType = _matingType;
         lifeCycle = _lifeCycle;
-        generationSize = _generationSize;
         dnaConverter.init(_aminoAcids);
     }
     
@@ -59,7 +57,7 @@ public:
     void mate(vector<vector<T>*>* children, vector<vector<T>*>* parents){
         int nHusband, nWife;
         for(int i = 0; i < children->size(); ){
-            switch(m_Mating){
+            switch(matingType){
                 case Harem:
                 case Monogamy:
                 case Polyandry:
@@ -92,9 +90,9 @@ public:
                     
                     //mate gametes
                     //add children to vector
-                    Zygote* egg = husband.fertilize(wife);
+                    Zygote* egg = new Zygote(wife, husband);
                     vector<Gamete*>* kids = egg->split();
-                    vector<Chromosomes>* chromos;
+                    vector<Chromosome>* chromos;
                     for(int j = 0; j < kids->size() && i < children->size(); j++){
                         //translate Gamete -> vector
                         //  Gamete -> Chromosomes -> nucleotide list -> "amino acids"
@@ -102,7 +100,7 @@ public:
                         if (chromos->size() == 0){
                             continue;
                         }
-                        *(children->at(i)) = dnaConverter.nucleotidesToAminoAcids(chromos->at(0).getNucleotides());
+                        children->at(i) = dnaConverter.nucleotidesToAminoAcids(chromos->at(0).getNucleotides());
                         i++;
                     }
             }
